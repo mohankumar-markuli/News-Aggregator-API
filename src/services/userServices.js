@@ -1,3 +1,5 @@
+const { getHashPassword } = require("../services/authServices");
+
 const getUserProfileService = (user) => {
     return {
         _id: user._id,
