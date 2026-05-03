@@ -1,0 +1,23 @@
+{
+  "name": "news-aggregator-api",
+  "version": "1.0.0",
+  "description": "a RESTful API for a personalized news aggregator",
+  "homepage": "https://github.com/mohankumar-markuli/News-Aggregator-API#readme",
+  "bugs": {
+    "url": "https://github.com/mohankumar-markuli/News-Aggregator-API/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohankumar-markuli/News-Aggregator-API.git"
+  },
+  "license": "ISC",
+  "author": "Mohankumar",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
