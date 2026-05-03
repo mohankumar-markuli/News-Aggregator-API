@@ -1,7 +1,8 @@
 const { getUserProfileService,
     updateUserService,
     changePasswordService,
-    getUserPreferenceService
+    getUserPreferenceService,
+    updateUserPreferencesService
 } = require("../services/userServices");
 
 const viewUser = async (req, res, next) => {
@@ -60,7 +61,7 @@ const viewUserPreferences = async (req, res, next) => {
 
         return res.status(200).json({
             message: `User ${req.user.firstName} fetched successfully`,
-            data
+            preferences: data
         });
 
     } catch (err) {
@@ -68,4 +69,20 @@ const viewUserPreferences = async (req, res, next) => {
     }
 };
 
-module.exports = { viewUser, editUser, changePassword, viewUserPreferences };
+const editUserPreferences = async (req, res, next) => {
+    try {
+        const data = await updateUserPreferencesService(req.user.preferences, req.body);
+
+        await req.user.save();
+
+        return res.status(200).json({
+            message: "Profile Updated Successfully",
+            preferences: data
+        });
+
+    } catch (err) {
+        return next(err);
+    }
+};
+
+module.exports = { viewUser, editUser, changePassword, viewUserPreferences, editUserPreferences };

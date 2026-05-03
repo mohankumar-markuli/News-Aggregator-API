@@ -94,9 +94,40 @@ const validateEditUserData = (req, res, next) => {
     }
 };
 
+const validateEditUserPreferencesData = (req, res, next) => {
+    try {
+        const keys = Object.keys(req.body || {});
+
+        if (keys.length === 0) {
+            throw new Error("No fields provided");
+        }
+
+        const ALLOWED_FIELDS = new Set([
+            "categories",
+            "languages",
+            "country"
+        ]);
+
+        const RESTRICTED_FIELDS = new Set([
+            "firstName",
+            "lastName",
+            "emailId",
+            "password",
+            "preferences"
+        ]);
+
+        validateFields(keys, ALLOWED_FIELDS, RESTRICTED_FIELDS);
+
+        next();
+    } catch (err) {
+        next(err);
+    }
+};
+
 module.exports = {
     validateSignUpData,
     validatePassword,
     validateChangePassword,
-    validateEditUserData
+    validateEditUserData,
+    validateEditUserPreferencesData
 };

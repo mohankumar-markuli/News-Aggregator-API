@@ -37,15 +37,30 @@ const getUserPreferenceService = (preferences) => {
     return {
         categories: preferences.categories,
         languages: preferences.languages,
-        countries: preferences.countries,
+        country: preferences.country,
     };
 };
 
+const updateUserPreferencesService = (preferences, body) => {
+    if (body.categories !== undefined) {
+        preferences.categories = body.categories;
+    }
 
+    if (body.languages !== undefined) {
+        preferences.languages = body.languages;
+    }
+
+    if (body.country !== undefined) {
+        preferences.country = body.country;
+    }
+
+    return preferences;
+};
 
 module.exports = {
     getUserProfileService,
     updateUserService,
     changePasswordService,
-    getUserPreferenceService
+    getUserPreferenceService,
+    updateUserPreferencesService
 }

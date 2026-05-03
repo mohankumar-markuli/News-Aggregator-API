@@ -2,8 +2,8 @@ const express = require("express");
 const userRouter = express.Router();
 
 const { userAuth } = require("../middlewares/userAuth");
-const { viewUser, editUser, changePassword, viewUserPreferences } = require("../controllers/userController");
-const { validateEditUserData, validateChangePassword } = require("../middlewares/validator");
+const { viewUser, editUser, changePassword, viewUserPreferences, editUserPreferences } = require("../controllers/userController");
+const { validateEditUserData, validateEditUserPreferencesData, validateChangePassword } = require("../middlewares/validator");
 
 userRouter.use(userAuth);
 
@@ -12,6 +12,7 @@ userRouter.patch('/profile', validateEditUserData, editUser);
 userRouter.patch('/password', validateChangePassword, changePassword);
 
 userRouter.get("/preferences", viewUserPreferences);
+userRouter.put("/preferences", validateEditUserPreferencesData, editUserPreferences);
 
 
-module.exports = userRouter;
+module.exports = userRouter; 

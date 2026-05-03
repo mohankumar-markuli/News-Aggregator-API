@@ -45,7 +45,7 @@ const userSchema = new mongoose.Schema({
             enum: LANGUAGE_ENUM,
             default: ["en"]
         },
-        countries: {
+        country: {
             type: String,
             enum: COUNTRY_ENUM,
             default: "in"
