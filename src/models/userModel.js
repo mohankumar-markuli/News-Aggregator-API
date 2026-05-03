@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema({
         languages: {
             type: [String],
             enum: LANGUAGE_ENUM,
-            default: []
+            default: ["en"]
         },
         countries: {
             type: String,
