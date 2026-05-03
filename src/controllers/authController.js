@@ -35,7 +35,7 @@ const userSignUp = async (req, res, next) => {
             firstName: savedUser.firstName,
             lastName: savedUser.lastName,
             emailId: savedUser.emailId,
-            currency: savedUser.preferences
+            preferences: savedUser.preferences
         };
 
         // Add the token to cookie and send the response back to the user

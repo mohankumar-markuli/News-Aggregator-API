@@ -16,7 +16,6 @@ const validateSignUpData = (req, res, next) => {
         if (!password || !validator.isStrongPassword(password)) {
             throw new Error("Strong password is required");
         }
-
         next();
 
     } catch (err) {
