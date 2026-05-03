@@ -31,8 +31,19 @@ const changePasswordService = async (user, newPassword) => {
     return true;
 };
 
+const getUserPreferenceService = (preferences) => {
+    return {
+        categories: preferences.categories,
+        languages: preferences.languages,
+        countries: preferences.countries,
+    };
+};
+
+
+
 module.exports = {
     getUserProfileService,
     updateUserService,
-    changePasswordService
+    changePasswordService,
+    getUserPreferenceService
 }
