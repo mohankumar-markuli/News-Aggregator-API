@@ -6,6 +6,7 @@ const getUserProfileService = (user) => {
         firstName: user.firstName,
         lastName: user.lastName,
         emailId: user.emailId,
+        preferences: user.preferences
     };
 };
 
