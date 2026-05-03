@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 
 const validateSignUpData = (req, res, next) => {
     try {
-        const { firstName, lastName, emailId, password, preferences } = req.body;
+        const { firstName, lastName, emailId, password } = req.body;
 
         if (!firstName) {
             throw new Error("First name is required");

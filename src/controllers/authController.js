@@ -6,7 +6,7 @@ const { validatePassword } = require("../middlewares/validator");
 const userSignUp = async (req, res, next) => {
     try {
 
-        const { firstName, lastName, emailId, password, preferences } = req.body;
+        const { firstName, lastName, emailId, password } = req.body;
 
         const existingUser = await User.findOne({ emailId });
 
@@ -23,7 +23,6 @@ const userSignUp = async (req, res, next) => {
             lastName,
             emailId,
             password: passwordHash,
-            preferences
         });
 
         const savedUser = await user.save();
@@ -35,7 +34,6 @@ const userSignUp = async (req, res, next) => {
             firstName: savedUser.firstName,
             lastName: savedUser.lastName,
             emailId: savedUser.emailId,
-            preferences: savedUser.preferences
         };
 
         // Add the token to cookie and send the response back to the user
