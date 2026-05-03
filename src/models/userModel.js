@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 
+const CATEGORY_ENUM = ["business", "technology", "sports", "health", "science", "entertainment"];
+const LANGUAGE_ENUM = ["en", "hi", "fr", "de"];
+const COUNTRY_ENUM = ["in", "us", "uk"];
+
 const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -33,14 +37,17 @@ const userSchema = new mongoose.Schema({
     preferences: {
         categories: {
             type: [String],
+            enum: CATEGORY_ENUM,
             default: []
         },
         languages: {
             type: [String],
+            enum: LANGUAGE_ENUM,
             default: []
         },
-        country: {
+        countries: {
             type: String,
+            enum: COUNTRY_ENUM,
             default: "in"
         }
     },
