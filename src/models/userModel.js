@@ -44,29 +44,10 @@ const userSchema = new mongoose.Schema({
             default: "in"
         }
     },
-
-    lastLogin: Date,
-
-    isActive: {
-        type: Boolean,
-        default: true
-    }
-
 },
     {
         timestamps: true
     }
 );
-
-userSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) return next();
-
-    // only hash if not already hashed
-    if (this.password.startsWith("$2b$")) return next();
-
-    const bcrypt = require("bcrypt");
-    this.password = await bcrypt.hash(this.password, 10);
-    next();
-});
 
 module.exports = mongoose.model("User", userSchema);
