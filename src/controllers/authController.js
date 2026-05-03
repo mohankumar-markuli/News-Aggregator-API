@@ -112,6 +112,20 @@ const userLogin = async (req, res, next) => {
     }
 };
 
+const userlogout = async (req, res, next) => {
+    try {
+        res.clearCookie("token", {
+            httpOnly: true,
+            sameSite: "strict",
+        });
+        res.json({
+            message: `Logout Successful`,
+        });;
+    } catch (err) {
+        next(err);
+    }
+}
+
 module.exports = {
-    userSignUp, userLogin
+    userSignUp, userLogin, userlogout
 }
