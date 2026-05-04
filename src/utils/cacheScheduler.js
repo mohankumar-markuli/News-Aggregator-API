@@ -17,7 +17,8 @@ const startCacheScheduler = () => {
     };
 
     safeUpdateCache(); // initial run
-    setInterval(safeUpdateCache, 5 * 60 * 1000);
+
+    setInterval(safeUpdateCache, 15 * 60 * 1000);
 };
 
 module.exports = startCacheScheduler;

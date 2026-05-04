@@ -4,10 +4,6 @@ const startCacheScheduler = require("./utils/cacheScheduler");
 
 const PORT = process.env.PORT || 3000;
 
-
-
-
-
 async function startServer() {
     try {
         console.log("Starting dependencies...");
@@ -19,7 +15,9 @@ async function startServer() {
             console.log(`Server running on port ${PORT}`);
         });
 
-        startCacheScheduler();
+        if (process.env.NODE_ENV === "production") {
+            startCacheScheduler();
+        }
 
     } catch (err) {
         console.error("Startup failed:", err.message);
