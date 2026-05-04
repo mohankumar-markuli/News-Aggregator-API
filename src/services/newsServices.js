@@ -85,6 +85,4 @@ const fetchNewsByKeyword = async (keyword) => {
     return { source: "api", articles };
 };
 
-module.exports = { fetchNewsByKeyword };
-
-module.exports = { fetchNews };
+module.exports = { fetchNews, fetchNewsByKeyword };
