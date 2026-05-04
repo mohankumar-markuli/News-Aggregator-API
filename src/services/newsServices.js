@@ -11,7 +11,7 @@ const fetchNews = async (req) => {
 
     const lang = languages?.[0] || "en";
 
-    const cacheKey = `news:${categories.join("-")}:${lang}:${country || "none"}`;
+    const cacheKey = `news:${[...categories].sort().join("-")}:${languages[0] || "en"}:${country || "none"}`;
 
     console.log(cacheKey)
 
