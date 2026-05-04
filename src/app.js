@@ -18,9 +18,11 @@ app.use(cookieParser());
 // routes
 const authRouter = require('./routes/authRoutes');
 const userRouter = require('./routes/userRoutes');
+const newsRouter = require('./routes/newsRoutes');
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/news", newsRouter);
 
 // health
 app.get("/api/v1/health", (req, res) => {
