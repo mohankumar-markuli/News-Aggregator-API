@@ -4,57 +4,128 @@ A backend system that aggregates news from an external API, supports user authen
 
 ---
 
-##  Features
+## Features
 
-* User Authentication (Signup, Login, Logout)
-* User Profile Management
-* User Preferences (categories, languages, country)
-* Fetch news from external API (GNews)
-* Search news by keyword
-* Caching to reduce external API calls
-* Mark articles as:
+- User Authentication (Signup, Login, Logout)
+- User Profile Management
+- User Preferences (categories, languages, country)
+- Fetch news from external API (GNews)
+- Search news by keyword
+- Caching to reduce external API calls
+- Mark articles as:
+  - Read
+  - Favorite
 
-  * Read
-  * Favorite
-* Retrieve:
+- Retrieve:
+  - Read articles
+  - Favorite articles
 
-  * Read articles
-  * Favorite articles
-* Background cache updates (simulating real-time feed)
-
----
-
-##  Tech Stack
-
-* Node.js
-* Express.js
-* MongoDB (Mongoose)
-* Node-Cache (in-memory caching)
-* Axios (external API calls)
-* JWT (authentication)
+- Background cache updates (simulating real-time feed)
 
 ---
 
-##  Project Structure
+## Tech Stack
+
+- Node.js
+- Express.js
+- MongoDB (Mongoose)
+- Node-Cache (in-memory caching)
+- Axios (external API calls)
+- JWT (authentication)
+
+---
+
+## Project Structure
 
 ```
-src/
+├── src/
+│   ├── config/
+│   │   └── database.js
+│   │
+│   ├── controllers/
+│   │   ├── articleController.js
+│   │   ├── authController.js
+│   │   ├── newsController.js
+│   │   └── userController.js
+│   │
+│   ├── middlewares/
+│   │   ├── errorHandler.js
+│   │   ├── logger.js
+│   │   ├── userAuth.js
+│   │   └── validator.js
+│   │
+│   ├── models/
+│   │   ├── articlesModel.js
+│   │   └── userModel.js
+│   │
+│   ├── routes/
+│   │   ├── articleRoutes.js
+│   │   ├── authRoutes.js
+│   │   ├── newsRoutes.js
+│   │   └── userRoutes.js
+│   │
+│   ├── services/
+│   │   ├── articleServices.js
+│   │   ├── authServices.js
+│   │   ├── newsServices.js
+│   │   └── userServices.js
+│   │
+│   ├── utils/
+│   │   ├── cache.js
+│   │   ├── cacheScheduler.js
+│   │   └── cacheUpdater.js
+│   │
+│   ├── app.js
+│   └── server.js
 │
-├── controllers/
-├── models/
-├── routes/
-├── services/
-├── middlewares/
-├── utils/
-├── config/
+├── test/
+│   ├── config/
+│   │   └── database.test.js
+│   │
+│   ├── controllers/
+│   │   ├── articleController.test.js
+│   │   ├── authController.test.js
+│   │   ├── newsController.test.js
+│   │   └── userController.test.js
+│   │
+│   ├── middlewares/
+│   │   ├── errorHandler.test.js
+│   │   ├── logger.test.js
+│   │   ├── userAuth.test.js
+│   │   └── validator.test.js
+│   │
+│   ├── models/
+│   │   ├── articleModel.test.js
+│   │   └── userModel.test.js
+│   │
+│   ├── routes/
+│   │   ├── articleRoutes.test.js
+│   │   ├── authRoutes.test.js
+│   │   ├── newsRoutes.test.js
+│   │   └── userRoutes.test.js
+│   │
+│   ├── services/
+│   │   ├── articleServices.test.js
+│   │   ├── authServices.test.js
+│   │   ├── newsServices.test.js
+│   │   └── userServices.test.js
+│   │
+│   ├── utils/
+│   │   ├── cache.test.js
+│   │   ├── cacheScheduler.test.js
+│   │   ├── cacheUpdater.test.js
+│   │   └── testApp.js
 │
-├── app.js
-└── server.js
+├── .env
+├── .gitignore
+├── package.json
+├── package-lock.json
+└── README.md
 ```
 
 ---
 
-##  Authentication Routes
+## Authentication Routes
 
 Base: `/api/v1/auth`
 
@@ -66,7 +137,7 @@ Base: `/api/v1/auth`
 
 ---
 
-##  User Routes
+## User Routes
 
 Base: `/api/v1/users` (Protected)
 
@@ -80,7 +151,7 @@ Base: `/api/v1/users` (Protected)
 
 ---
 
-##  News Routes
+## News Routes
 
 Base: `/api/v1/news` (Protected)
 
@@ -91,7 +162,7 @@ Base: `/api/v1/news` (Protected)
 
 ---
 
-##  Article Routes
+## Article Routes
 
 Base: `/api/v1/news` (Protected)
 
@@ -104,35 +175,35 @@ Base: `/api/v1/news` (Protected)
 
 ---
 
-##  Caching Strategy
+## Caching Strategy
 
-* Query-based cache:
+- Query-based cache:
 
   ```
   news:<category>:<language>
   ```
 
-* Article-based cache:
+- Article-based cache:
 
   ```
   article:<articleId>
   ```
 
-* Reduces external API calls
+- Reduces external API calls
 
-* Improves response time
-
----
-
-##  Background Cache Updates
-
-* Periodically refreshes cache using `setInterval`
-* Prevents stale data
-* Avoids repeated API calls
+- Improves response time
 
 ---
 
-##  Installation
+## Background Cache Updates
+
+- Periodically refreshes cache using `setInterval`
+- Prevents stale data
+- Avoids repeated API calls
+
+---
+
+## Installation
 
 ```bash
 git clone <repo-url>
@@ -156,7 +227,7 @@ NODE_ENV=development
 
 ---
 
-##  Run the Server
+## Run the Server
 
 ```bash
 npm run dev
@@ -164,44 +235,55 @@ npm run dev
 
 ---
 
-##  Design Decisions
+## Design Decisions
 
-* **Cache + DB hybrid**
+- **Cache + DB hybrid**
+  - Cache → fast reads
+  - DB → persistent user actions
 
-  * Cache → fast reads
-  * DB → persistent user actions
+- **Service Layer**
+  - Business logic separated from controllers
 
-* **Service Layer**
-
-  * Business logic separated from controllers
-
-* **Minimal data storage**
-
-  * Only required article fields stored
+- **Minimal data storage**
+  - Only required article fields stored
 
 ---
 
-##  Limitations
+## Limitations
 
-* Cache is in-memory (lost on restart)
-* External API rate limits apply
-* Free API has delayed data (~12 hours)
-
----
-
-##  Future Improvements
-
-* Redis caching (production)
-* Pagination support
-* Trending news
-* Better search filters
-* Rate limiting & throttling
+- Cache is in-memory (lost on restart)
+- External API rate limits apply
+- Free API has delayed data (~12 hours)
 
 ---
 
-##  Health Check
+## Future Improvements
+
+- Redis caching (production)
+- Pagination support
+- Trending news
+- Better search filters
+- Rate limiting & throttling
+
+---
+
+## Health Check
 
 ```
 GET /api/v1/health
 ```
 
+## Testing
+
+This project includes unit tests and integration tests to ensure all parts of the system work correctly.
+
+- Unit tests: services, controllers, models, middleware
+- Integration tests: API routes using Supertest
+- In-memory database is used for testing
+
+### Run tests
+
+```bash
+npm test
+npm run test:coverage
+```
