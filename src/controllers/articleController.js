@@ -11,7 +11,7 @@ const postReadNews = async (req, res, next) => {
 
         let article = cache.get(`article:${articleId}`) || req.body;
 
-        if (!article || !article.id) {
+        if (!article) {
             return res.status(400).json({ message: "Article data missing" });
         }
 
@@ -30,7 +30,7 @@ const postFavoriteNews = async (req, res, next) => {
 
         let article = cache.get(`article:${articleId}`) || req.body;
 
-        if (!article || !article.id) {
+        if (!article) {
             return res.status(400).json({ message: "Article data missing" });
         }
 

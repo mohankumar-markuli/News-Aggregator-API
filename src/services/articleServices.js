@@ -18,7 +18,7 @@ const saveArticle = async (userId, articleId, article, type) => {
     return Article.findOneAndUpdate(
         { userId, articleId },
         update,
-        { upsert: true, new: true }
+        { upsert: true, returnDocument: 'after' }
     );
 };
 
