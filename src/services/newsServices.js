@@ -33,6 +33,10 @@ const fetchNews = async (req) => {
 
     cache.set(cacheKey, articles);
 
+    articles.forEach(article => {
+        cache.set(`article:${article.id}`, article)
+    });
+
     return { source: "api", articles };
 };
 
