@@ -1,4 +1,4 @@
-const { fetchNews } = require("../services/newsServices");
+const { fetchNews, fetchNewsByKeyword } = require("../services/newsServices");
 
 const getNews = async (req, res, next) => {
     try {
@@ -16,4 +16,16 @@ const getNews = async (req, res, next) => {
     }
 };
 
-module.exports = { getNews };
+const getNewsByKeyword = async (req, res, next) => {
+    try {
+        const keyword = req.params.keyword;
+
+        const result = await fetchNewsByKeyword(keyword);
+
+        res.json(result);
+    } catch (err) {
+        next(err);
+    }
+};
+
+module.exports = { getNews, getNewsByKeyword };
