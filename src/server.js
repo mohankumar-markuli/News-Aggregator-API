@@ -1,7 +1,12 @@
 const app = require("./app");
 const connectDb = require("./config/database");
+const startCacheScheduler = require("./utils/cacheScheduler");
 
 const PORT = process.env.PORT || 3000;
+
+
+
+
 
 async function startServer() {
     try {
@@ -13,6 +18,8 @@ async function startServer() {
         app.listen(PORT, () => {
             console.log(`Server running on port ${PORT}`);
         });
+
+        startCacheScheduler();
 
     } catch (err) {
         console.error("Startup failed:", err.message);
