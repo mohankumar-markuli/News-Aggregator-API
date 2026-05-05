@@ -19,24 +19,11 @@ jobs:
         with:
           node-version: "18.x"
 
-      - name: Navigate to target directory
-        run: cd ./6-UnitTesting/6-ContinuousIntegration
-
       - name: Install dependencies
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          else
-            npm install
-          fi
+        run: npm ci
 
       - name: Run tests
-        id: test
-        run: |
-          echo "test_output<<EOF" >> $GITHUB_OUTPUT
-          npm test 2>&1 | tee test_output.log
-          echo "EOF" >> $GITHUB_OUTPUT
-        continue-on-error: true
+        run: npm test -- --coverage 2>&1 | tee test_output.log
 
       - name: Comment PR
         uses: actions/github-script@v6
@@ -45,7 +32,13 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const fs = require('fs');
-            const testOutput = fs.readFileSync('./test_output.log', 'utf8');
+
+            let testOutput = fs.readFileSync('./test_output.log', 'utf8');
+            const maxLength = 60000;
+
+            if (testOutput.length > maxLength) {
+              testOutput = testOutput.slice(0, maxLength) + "\n... (truncated)";
+            }
 
             const comment = `## Test Results
 
@@ -59,4 +52,4 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: comment
-            })
+            });
