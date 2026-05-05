@@ -2,7 +2,6 @@
 
 A backend system that aggregates news from an external API, supports user authentication, personalized preferences, caching, and user interactions like marking articles as read or favorite.
 
----
 
 ## Features
 
@@ -22,7 +21,6 @@ A backend system that aggregates news from an external API, supports user authen
 
 - Background cache updates (simulating real-time feed)
 
----
 
 ## Tech Stack
 
@@ -33,7 +31,7 @@ A backend system that aggregates news from an external API, supports user authen
 - Axios (external API calls)
 - JWT (authentication)
 
----
+
 
 ## Project Structure
 
